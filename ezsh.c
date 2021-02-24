@@ -103,7 +103,7 @@ int main (void){
         
         getLine(buffer, bufferSize);
 
-        if(buffer[0] == 0) break; //EOF
+        if(buffer[0] == 0) {printf(1,"\n"); break;} //EOF
 
         writeHistory(buffer);
 
@@ -114,17 +114,11 @@ int main (void){
         int argc = tokenizeLine(buffer, bufferSize, argBuffer, argBufferSize);
         char ** argv = argBuffer;
         char* command = argv[0];
-        if (command){
-
-            if (command[0] == 'c' && command[1] == 'd'){
-                changeDirectory(argv,argc);
-            }
-            else{
-                execCommand(command,argv,argc);
-            }
+        if (command[0] == 'c' && command[1] == 'd'){
+            changeDirectory(argv,argc);
         }
         else{
-            printf(1,"No command\n");
+            execCommand(command,argv,argc);
         }
     }
     unlink("/.ezshHistory");
